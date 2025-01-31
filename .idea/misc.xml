@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="linkedin_search" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="linkedin_search" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Linkedin_search" project-jdk-type="Python SDK" />
 </project>
