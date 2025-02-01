@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>Jobs.ipynb</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+.ls0 { height: 1px; border-width: 0; color: #43454a; background-color:#43454a}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Jobs.ipynb</font>
+</center></td></tr></table>
+<pre><span class="s0">#%% 
+</span><span class="s1">import </span><span class="s2">pandas </span><span class="s1">as </span><span class="s2">pd</span>
+<span class="s1">import </span><span class="s2">time</span>
+<span class="s1">import </span><span class="s2">random</span>
+<span class="s1">from </span><span class="s2">selenium </span><span class="s1">import </span><span class="s2">webdriver</span>
+<span class="s1">from </span><span class="s2">selenium</span><span class="s3">.</span><span class="s2">webdriver</span><span class="s3">.</span><span class="s2">common</span><span class="s3">.</span><span class="s2">keys </span><span class="s1">import </span><span class="s2">Keys</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">PROXY </span><span class="s3">= </span><span class="s4">&quot;79.1.255.238:8080&quot;</span>
+<span class="s2">url</span><span class="s3">=</span><span class="s4">'https://www.linkedin.com/login'</span>
+<span class="s2">USERNAME</span><span class="s3">=</span><span class="s4">''</span>
+<span class="s2">PASSWORD</span><span class="s3">=</span><span class="s4">''</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">ch</span><span class="s3">=</span><span class="s2">webdriver</span><span class="s3">.</span><span class="s2">ChromeOptions</span><span class="s3">()</span>
+<span class="s2">ch</span><span class="s3">.</span><span class="s2">add_argument</span><span class="s3">(</span><span class="s4">'--proxy-server=%s' </span><span class="s3">% </span><span class="s2">PROXY</span><span class="s3">)</span>
+<span class="s2">driver</span><span class="s3">=</span><span class="s2">webdriver</span><span class="s3">.</span><span class="s2">Chrome</span><span class="s3">(</span><span class="s2">executable_path</span><span class="s3">=</span><span class="s4">'D:\chromedriver.exe'</span><span class="s3">)</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">driver</span><span class="s3">.</span><span class="s2">get</span><span class="s3">(</span><span class="s2">url</span><span class="s3">)</span><hr class="ls0"><span class="s0">#%% 
+#driver.quit()</span>
+<span class="s2">user_element</span><span class="s3">=</span><span class="s2">driver</span><span class="s3">.</span><span class="s2">find_element_by_id</span><span class="s3">(</span><span class="s4">'username'</span><span class="s3">)</span>
+<span class="s2">pass_element</span><span class="s3">=</span><span class="s2">driver</span><span class="s3">.</span><span class="s2">find_element_by_id</span><span class="s3">(</span><span class="s4">'password'</span><span class="s3">)</span>
+<span class="s2">user_element</span><span class="s3">.</span><span class="s2">send_keys</span><span class="s3">(</span><span class="s2">USERNAME</span><span class="s3">)</span>
+<span class="s2">pass_element</span><span class="s3">.</span><span class="s2">send_keys</span><span class="s3">(</span><span class="s2">PASSWORD</span><span class="s3">)</span>
+<span class="s2">pass_element</span><span class="s3">.</span><span class="s2">send_keys</span><span class="s3">(</span><span class="s2">Keys</span><span class="s3">.</span><span class="s2">RETURN</span><span class="s3">)</span>
+<span class="s2">time</span><span class="s3">.</span><span class="s2">sleep</span><span class="s3">(</span><span class="s2">int</span><span class="s3">(</span><span class="s2">random</span><span class="s3">.</span><span class="s2">uniform</span><span class="s3">(</span><span class="s5">5</span><span class="s3">,</span><span class="s5">7</span><span class="s3">)))</span>
+<span class="s2">driver</span><span class="s3">.</span><span class="s2">refresh</span><span class="s3">()</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">url2</span><span class="s3">=[</span><span class="s4">'https://www.linkedin.com/jobs/search/?geoId=92000000&amp;keywords=investments&amp;location=Todo%20el%20mundo'</span><span class="s3">]</span>
+<span class="s1">for </span><span class="s2">x </span><span class="s1">in </span><span class="s2">range</span><span class="s3">(</span><span class="s5">25</span><span class="s3">,</span><span class="s5">250</span><span class="s3">,</span><span class="s5">25</span><span class="s3">):</span>
+    <span class="s2">url2</span><span class="s3">.</span><span class="s2">append</span><span class="s3">(</span><span class="s2">url2</span><span class="s3">[</span><span class="s5">0</span><span class="s3">]+</span><span class="s4">'&amp;start='</span><span class="s3">+</span><span class="s2">str</span><span class="s3">(</span><span class="s2">x</span><span class="s3">))</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s1">try</span><span class="s3">:</span>
+    <span class="s2">df_full</span><span class="s3">=</span><span class="s2">pd</span><span class="s3">.</span><span class="s2">DataFrame</span><span class="s3">()</span>
+    <span class="s1">for </span><span class="s2">url </span><span class="s1">in </span><span class="s2">url2</span><span class="s3">:</span>
+        <span class="s2">print</span><span class="s3">(</span><span class="s4">'Listo'</span><span class="s3">)</span>
+        <span class="s2">driver</span><span class="s3">.</span><span class="s2">get</span><span class="s3">(</span><span class="s2">url</span><span class="s3">)</span>
+        <span class="s2">time</span><span class="s3">.</span><span class="s2">sleep</span><span class="s3">(</span><span class="s2">int</span><span class="s3">(</span><span class="s2">random</span><span class="s3">.</span><span class="s2">uniform</span><span class="s3">(</span><span class="s5">5</span><span class="s3">,</span><span class="s5">7</span><span class="s3">)))</span>
+        <span class="s2">lists</span><span class="s3">=</span><span class="s2">driver</span><span class="s3">.</span><span class="s2">find_elements_by_css_selector</span><span class="s3">(</span><span class="s4">'li.occludable-update.artdeco-list__item--offset-2.artdeco-list__item.p0.ember-view'</span><span class="s3">)</span>
+        
+        <span class="s1">for </span><span class="s2">l </span><span class="s1">in </span><span class="s2">lists</span><span class="s3">:</span>
+            <span class="s2">l</span><span class="s3">.</span><span class="s2">location_once_scrolled_into_view</span>
+            <span class="s2">time</span><span class="s3">.</span><span class="s2">sleep</span><span class="s3">(</span><span class="s2">random</span><span class="s3">.</span><span class="s2">randrange</span><span class="s3">(</span><span class="s5">1</span><span class="s3">, </span><span class="s5">5</span><span class="s3">, </span><span class="s5">1</span><span class="s3">)/</span><span class="s5">10</span><span class="s3">)</span>
+        <span class="s2">lists</span><span class="s3">= </span><span class="s2">driver</span><span class="s3">.</span><span class="s2">find_elements_by_css_selector</span><span class="s3">(</span><span class="s4">'li.occludable-update.artdeco-list__item--offset-2.artdeco-list__item.p0.ember-view'</span><span class="s3">)</span>
+        
+        <span class="s1">for </span><span class="s2">l </span><span class="s1">in </span><span class="s2">lists</span><span class="s3">:</span>
+            <span class="s1">try</span><span class="s3">:</span>
+                <span class="s2">title</span><span class="s3">= </span><span class="s2">l</span><span class="s3">.</span><span class="s2">find_element_by_css_selector</span><span class="s3">(</span><span class="s4">'div.full-width.artdeco-entity-lockup__title.ember-view'</span><span class="s3">).</span><span class="s2">text </span><span class="s0">#posicion</span>
+                <span class="s2">compania</span><span class="s3">=</span><span class="s2">l</span><span class="s3">.</span><span class="s2">find_element_by_css_selector</span><span class="s3">(</span><span class="s4">'div.artdeco-entity-lockup__subtitle.ember-view'</span><span class="s3">).</span><span class="s2">text </span><span class="s0">#compañia</span>
+                <span class="s2">ubicacion</span><span class="s3">=</span><span class="s2">l</span><span class="s3">.</span><span class="s2">find_element_by_css_selector</span><span class="s3">(</span><span class="s4">'div.artdeco-entity-lockup__caption.ember-view'</span><span class="s3">).</span><span class="s2">text </span><span class="s0">#ubicacion</span>
+                <span class="s2">fecha</span><span class="s3">=</span><span class="s2">l</span><span class="s3">.</span><span class="s2">find_element_by_css_selector</span><span class="s3">(</span><span class="s4">'li.job-card-container__listed-time.job-card-container__footer-item'</span><span class="s3">).</span><span class="s2">text </span><span class="s0">#fecha</span>
+                <span class="s2">link</span><span class="s3">=</span><span class="s2">l</span><span class="s3">.</span><span class="s2">find_element_by_tag_name</span><span class="s3">(</span><span class="s4">'a'</span><span class="s3">).</span><span class="s2">get_attribute</span><span class="s3">(</span><span class="s4">'href'</span><span class="s3">).</span><span class="s2">split</span><span class="s3">(</span><span class="s4">&quot;?&quot;</span><span class="s3">,</span><span class="s5">1</span><span class="s3">)[</span><span class="s5">0</span><span class="s3">] </span><span class="s0">#link  </span>
+                <span class="s2">df</span><span class="s3">=</span><span class="s2">pd</span><span class="s3">.</span><span class="s2">DataFrame</span><span class="s3">({</span><span class="s4">'Puesto'</span><span class="s3">:</span><span class="s2">title</span><span class="s3">,</span>
+                                 <span class="s4">'Empresa'</span><span class="s3">:</span><span class="s2">compania</span><span class="s3">,</span>
+                                 <span class="s4">'Ubicacion'</span><span class="s3">:</span><span class="s2">ubicacion</span><span class="s3">,</span>
+                                 <span class="s4">'Fecha'</span><span class="s3">:</span><span class="s2">fecha</span><span class="s3">,</span>
+                                 <span class="s4">'Link'</span><span class="s3">:</span><span class="s2">link</span><span class="s3">,}, </span><span class="s2">index</span><span class="s3">=[</span><span class="s5">0</span><span class="s3">])</span>
+                <span class="s2">df_full</span><span class="s3">=</span><span class="s2">df_full</span><span class="s3">.</span><span class="s2">append</span><span class="s3">(</span><span class="s2">df</span><span class="s3">,</span><span class="s2">ignore_index</span><span class="s3">=</span><span class="s1">True</span><span class="s3">)</span>
+            <span class="s1">except </span><span class="s2">Exception </span><span class="s1">as </span><span class="s2">e</span><span class="s3">:</span>
+                <span class="s2">print</span><span class="s3">(</span><span class="s2">e</span><span class="s3">)</span>
+<span class="s1">except </span><span class="s2">Exception </span><span class="s1">as </span><span class="s2">e</span><span class="s3">:</span>
+    <span class="s2">print</span><span class="s3">(</span><span class="s2">e</span><span class="s3">)</span><hr class="ls0"><span class="s0">#%% md 
+</span><span class="s2">```python 
+driver.find_elements_by_css_selector('li.occludable-update.artdeco-list__item--offset-4.artdeco-list__item.p0.ember-view') 
+#BUSCA LINEAS DEL CODIGO CON ESTAS CARACTERISTICAS 
+ 
+ 
+#ESTE ES EL CODIGO DE HTML EN LINKEDIN 
+#AL INICIO TENEMOS LI Y DESPUES LA CLASE 
+&lt;li id=&quot;ember280&quot; class=&quot;occludable-update artdeco-list__item--offset-2 artdeco-list__item p0 ember-view&quot;  
+ 
+lists[0].find_element_by_css_selector('div.full-width.artdeco-entity-lockup__title.ember-view').text #posicion 
+lists[0].find_element_by_css_selector('div.artdeco-entity-lockup__subtitle.ember-view').text #compañia 
+lists[0].find_element_by_css_selector('div.artdeco-entity-lockup__caption.ember-view').text #ubicacion 
+lists[0].find_element_by_css_selector('li.job-card-container__listed-time.job-card-container__footer-item').text #fecha 
+lists[0].find_element_by_tag_name('a').get_attribute('href').split(&quot;?&quot;,1)[0] #link     
+     
+```    <hr class="ls0"></span><span class="s0">#%% 
+</span><span class="s2">driver</span><span class="s3">.</span><span class="s2">get</span><span class="s3">(</span><span class="s2">url2</span><span class="s3">[</span><span class="s5">1</span><span class="s3">])</span>
+<span class="s2">time</span><span class="s3">.</span><span class="s2">sleep</span><span class="s3">(</span><span class="s2">int</span><span class="s3">(</span><span class="s2">random</span><span class="s3">.</span><span class="s2">uniform</span><span class="s3">(</span><span class="s5">5</span><span class="s3">,</span><span class="s5">7</span><span class="s3">)))</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">lists</span><span class="s3">=</span><span class="s2">driver</span><span class="s3">.</span><span class="s2">find_elements_by_css_selector</span><span class="s3">(</span><span class="s4">'li.occludable-update.artdeco-list__item--offset-2.artdeco-list__item.p0.ember-view'</span><span class="s3">) </span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">lists</span><span class="s3">[</span><span class="s5">0</span><span class="s3">].</span><span class="s2">location_once_scrolled_into_view</span>
+<span class="s2">time</span><span class="s3">.</span><span class="s2">sleep</span><span class="s3">(</span><span class="s2">random</span><span class="s3">.</span><span class="s2">randrange</span><span class="s3">(</span><span class="s5">1</span><span class="s3">, </span><span class="s5">5</span><span class="s3">, </span><span class="s5">1</span><span class="s3">)/</span><span class="s5">10</span><span class="s3">)</span>
+<span class="s2">lists</span><span class="s3">= </span><span class="s2">driver</span><span class="s3">.</span><span class="s2">find_elements_by_css_selector</span><span class="s3">(</span><span class="s4">'li.occludable-update.artdeco-list__item--offset-2.artdeco-list__item.p0.ember-view'</span><span class="s3">)</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">title</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">df</span><span class="s3">=</span><span class="s2">pd</span><span class="s3">.</span><span class="s2">DataFrame</span><span class="s3">({</span><span class="s4">'Puesto'</span><span class="s3">:</span><span class="s2">title</span><span class="s3">,</span>
+                             <span class="s4">'Empresa'</span><span class="s3">:</span><span class="s2">compania</span><span class="s3">,</span>
+                             <span class="s4">'Ubicacion'</span><span class="s3">:</span><span class="s2">ubicacion</span><span class="s3">,</span>
+                             <span class="s4">'Fecha'</span><span class="s3">:</span><span class="s2">fecha</span><span class="s3">,</span>
+                             <span class="s4">'Link'</span><span class="s3">:</span><span class="s2">link</span><span class="s3">}, </span><span class="s2">index</span><span class="s3">=[</span><span class="s5">0</span><span class="s3">])</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">df_full</span><span class="s3">=</span><span class="s2">df_full</span><span class="s3">.</span><span class="s2">append</span><span class="s3">(</span><span class="s2">df</span><span class="s3">)</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">df_full</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">df_full</span><span class="s3">.</span><span class="s2">to_excel</span><span class="s3">(</span><span class="s4">'jobs.xlsx'</span><span class="s3">)</span><hr class="ls0"><span class="s0">#%% 
+</span><span class="s2">driver</span><span class="s3">.</span><span class="s2">close</span><span class="s3">()</span><hr class="ls0"><span class="s0">#%% 
+</span></pre>
+</body>
+</html>
